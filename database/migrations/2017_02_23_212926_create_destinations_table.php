@@ -14,8 +14,13 @@ class CreateDestinationsTable extends Migration
     public function up()
     {
         Schema::create('destinations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
+            $table->enum('kind',[1,2])->default(1);
+            $table->string('name');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
