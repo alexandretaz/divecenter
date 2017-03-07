@@ -14,7 +14,9 @@ class CreateCourseRequisitesTable extends Migration
     public function up()
     {
         Schema::create('course_requisites', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
+            $table->string('requisite_type');
+            $table->integer('requisite_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->decimal('cost',10,2);
             $table->decimal('price', 10,2);
             $table->string('model');
-            $table->json('prices');
+            $table->longText('prices')->nullable();
             $table->timestamps();
         });
     }
