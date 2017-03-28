@@ -10,4 +10,14 @@ class Course extends Model
     {
         return $this->hasMany('App\CourseModules');
     }
+
+    public function requisites()
+    {
+        return $this->hasMany('App\CourseRequisites');
+    }
+
+    public function events()
+    {
+        return $this->morphMany('App\Event','eventable');
+    }
 }
