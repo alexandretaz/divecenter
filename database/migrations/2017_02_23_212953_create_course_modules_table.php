@@ -17,10 +17,9 @@ class CreateCourseModulesTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->tinyInteger('kind',false, true);
-            $table->json('dependencies');
+            $table->longText('dependencies');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

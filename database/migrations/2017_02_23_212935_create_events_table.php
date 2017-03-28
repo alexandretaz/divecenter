@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->json('prices');
             $table->integer('eventable_id')->unsigned();
             $table->string('eventable_type');
+            $table->longText('prices')->nullable();
             $table->timestamps();
         });
     }

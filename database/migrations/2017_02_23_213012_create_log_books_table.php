@@ -14,8 +14,10 @@ class CreateLogBooksTable extends Migration
     public function up()
     {
         Schema::create('log_books', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
+            $table->integer('user_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
