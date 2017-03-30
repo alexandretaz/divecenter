@@ -62,8 +62,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $firstName = explode(" ", $data['name'])[0];
+        $lastName = str_ireplace($firstName,'',$data['name']);
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $firstName,
+            'last_name'=>$lastName,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
