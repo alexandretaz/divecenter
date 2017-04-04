@@ -6,10 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    const LEVEL_ENTRY_SUPERVISIONED = 1;
+    const LEVEL_ENTRY_NOT_SUPERVISIONED = 2;
+    const LEVEL_ADVENTURE = 3;
+    const LEVEL_ADVANCED = 4;
+    const LEVEL_RESCUE = 5;
+    const LEVEL_SPECIALTY = 6;
+    const LEVEL_PRO = 7;
+
     const ViewFolder='course';
     const Single='course';
     const Plural='courses';
     const LIST_NAME = 'courses\' list';
+
+    protected $fillable = [
+        'course',
+        'description',
+        'cost',
+        'price',
+        'level',
+    ];
 
     public static $_list = [
         ['name'=>'id', 'label'=>'#', 'is_ordenable'=>true, 'is_filter'=>false],
@@ -34,7 +50,7 @@ class Course extends Model
 
     public function getNextDateAttribute() {
         $today = new \DateTime();
-        $next = \App\Events::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->first();
+        $next = \App\Event::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->first();
         return $next;
     }
 
@@ -44,4 +60,8 @@ class Course extends Model
         return next;
     }
 
+    public static function getAllLevels()
+    {
+        return [self::LEVEL_ENTRY_SUPERVISIONED, self::LEVEL_ENTRY_NOT_SUPERVISIONED, self::LEVEL_ADVENTURE,self::LEVEL_ADVANCED, self::LEVEL_RESCUE, self::LEVEL_SPECIALTY, self::LEVEL_PRO];
+    }
 }

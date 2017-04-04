@@ -23,9 +23,6 @@ class CreateEventsTable extends Migration
             $table->decimal('price', 10,2);
             $table->string('model');
             $table->json('prices');
-            $table->integer('eventable_id')->unsigned();
-            $table->string('eventable_type');
-            $table->longText('prices')->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(array $criteria = array(), array $order = array() )
+    public function index(array $criteria = array(), array $order = array())
     {
         return view('home');
     }

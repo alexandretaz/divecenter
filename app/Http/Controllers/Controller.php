@@ -31,12 +31,13 @@ class Controller extends BaseController
 
     public function add()
     {
-        return $this->view(static::ViewFolder.'.form',['entity'=> $this->getEntity]);
+        return view(static::ViewFolder.'.form',['entity'=> $this->getEntity()]);
     }
 
     public function make(Request $request)
     {
-        return $this->getEntity()->populate($request->input())->save();
+        $input = $this->filter($request);
+        return $this->getEntity()->create($input);
     }
 
     public function update($entityId, Request $request)
@@ -65,5 +66,11 @@ class Controller extends BaseController
             $entity::findOrFail($id);
         }
         return $entity;
+    }
+
+    protected function filter(Request $request) {
+        $inputs = $request->input();
+        unset ($inputs['_token']);
+        return $inputs;
     }
 }

@@ -10,9 +10,9 @@
                     <div class="panel-body">
                         <div class="col-md-6 col-xs-12">{{trans('List of All '.$entity::Plural)}}</div>
                         <div class="col-md-6 col-xs-12">
-                            <a href="{{route($entity::Single.'_add')}}" class="btn btn-success">+{{trans('Add a')}} {{ucfirst(trans($entity::Single))}}</a>
+                            <a href="{{route($entity::Single.'_add')}}" class="btn btn-success">+{{trans('Add a')}} {{ucfirst(__('messages.'.$entity::Single))}}</a>
                         </div>
-                        <table class="table table-bordered table-responsive">
+                        <table class="table table-bordered table-responsive table-striped">
                             <thead>
                                 <tr>
                                     @foreach($entity::$_list as $field)
@@ -25,6 +25,7 @@
                             </thead>
                             <tbody>
                             @forelse($list as $item)
+                                @include('default.list_row',['item'=>$item, 'fields'=>$entity::$_list])
 
                                 @empty
                                 <tr>
@@ -34,7 +35,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="{{count($entity::$_list)+1}}">Pagination links</td>
+                                <td colspan="{{count($entity::$_list)+1}}">{{$list->links()}}</td>
                             </tr>
                             </tfoot>
                         </table>
