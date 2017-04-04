@@ -26,7 +26,7 @@ class Controller extends BaseController
             }
         }
         $items  = $entities->paginate(20);
-        return $this->view('default.list', ['list'=>$items, 'entity'=>$this->getEntity()]);
+        return view('default.list', ['list'=>$items, 'entity'=>$this->getEntity()]);
     }
 
     public function add()
@@ -34,7 +34,7 @@ class Controller extends BaseController
         return $this->view(static::ViewFolder.'.form',['entity'=> $this->getEntity]);
     }
 
-    public function create(Request $request)
+    public function make(Request $request)
     {
         return $this->getEntity()->populate($request->input())->save();
     }
@@ -55,5 +55,15 @@ class Controller extends BaseController
     {
         $entity = $this->getEntity(decrypt($request->input('id')));
         return $entity->delete();
+    }
+
+    public function getEntity($id = null)
+    {
+        $entityKind = static::MAIN_ENTITY;
+        $entity = new $entityKind();
+        if($id !== null && strcasecmp($id, (int) $id) === 0) {
+            $entity::findOrFail($id);
+        }
+        return $entity;
     }
 }

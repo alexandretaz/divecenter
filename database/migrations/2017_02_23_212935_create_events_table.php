@@ -17,6 +17,8 @@ class CreateEventsTable extends Migration
             $table->increments('id')->unsigned();
             $table->dateTime('begins');
             $table->dateTime('ends');
+            $table->string('eventable_type',255);
+            $table->integer('eventable_id')->unsigned();
             $table->decimal('cost',10,2);
             $table->decimal('price', 10,2);
             $table->string('model');
