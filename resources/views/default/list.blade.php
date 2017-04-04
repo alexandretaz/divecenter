@@ -23,6 +23,20 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                            @forelse($list as $item)
+
+                                @empty
+                                <tr>
+                                    <td colspan="{{count($entity::$_list)+1}}">There's no {{$entity::Single}} recorded on the system</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="{{count($entity::$_list)+1}}">Pagination links</td>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
