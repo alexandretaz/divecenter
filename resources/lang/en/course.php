@@ -6,8 +6,13 @@ return[
         ],
     'preq'=>['labels'=>[
             'course'=>'Select Pre-requisite Certification',
-            'age'=>'Minimum age for this course'
-        ]
+            'age'=>'Minimum age for this course',
+            'add'=> 'Add new Prerequisite'
+        ],'course'=>'Select Pre-requisite Certification',
+        'age'=>'Minimum age for this course',
+        'add'=> 'Add new Prerequisite',
+        'mindive'=>'Minimun number of Dives',
+        'minDives'=>'Minimun number of Dives'
     ],
     'course'=>'Course Title:',
     'level'=>'Certification Level:',

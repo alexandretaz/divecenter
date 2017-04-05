@@ -13,9 +13,15 @@
     <div class="form-group">
         <label for = "cursoPrereq{{$index}}">
             {{__('course.preq.labels.age')}}
-            <input type="number" min="0" step="1" name="preq[{{$index}}]['id']">
+            <input type="number" min="0" step="1" name="preq[{{$index}}]['id']" class="form-control">
 
         </label>
     </div>
+    @elseif($type=='minDives')
+    <label for = "cursoPrereq{{$index}}">
+        {{__('course.preq.minDives')}}
+        <input type="number" min="0" step="1" name="preq[{{$index}}]['id']" class="form-control">
 
+    </label>
+    </div>
 @endif

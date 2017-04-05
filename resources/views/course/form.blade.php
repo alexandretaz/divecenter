@@ -58,7 +58,17 @@
                             <div class="form-group">
                             <label for="course_prerequisites"> {{__('course.pre_req')}}
                                 <fieldset class="form-group" id = "course_prerequisites">
-                                    <a href="#" id="addPreReq" class="btn btn-sm btn-default">+{{__('course.add_req')}}</a>
+                                    <!-- Single button -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{__('course.preq.add')}}<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="addPreReq" id="coursePreq">{{__('course.preq.course')}}</a></li>
+                                            <li><a href="#" class="addPreReq" id="agePreq">{{__('course.preq.age')}}</a></li>
+                                            <li><a href="#" class="addPreReq" id="minDivesPreq">{{__('course.preq.mindive')}}</a></li>
+                                        </ul>
+                                    </div>
 
                                 </fieldset>
                             </label>
@@ -84,8 +94,26 @@
 <script>
 indexPreq = 0;
     $(document).ready(function(){
-        $("#addPreReq").on('click', function(){
-            $.get('{{route('course_get_req',['type'=>'course'])}}/'+indexPreq, function(data){
+        $(".addPreReq").on('click', function(){
+            id = $(this).attr('id');
+            alert(id);
+            type = null;
+            if(id=='coursePreq'){
+                type='course';
+            }
+            else {
+                if(id=='agePreq') {
+                    type='age';
+                }
+                if(id=='minDivesPreq'){
+                    type="minDives"
+                }
+            }
+            alert(type);
+            url ='{{route('course_get_req',['type'=>'type'])}}/'+indexPreq;
+                 url =  url.replace('type', type);
+
+            $.get(url, function(data){
                 $("#course_prerequisites").prepend(data);
             })
         })
