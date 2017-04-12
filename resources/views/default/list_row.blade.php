@@ -11,13 +11,13 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="{{route($routes['view'])}}">{{ucfirst(__('messages.view'))}}</a></li>
-                <li><a href="{{route($routes['edit'])}}">{{ucfirst(__('messages.edit'))}}</a></li>
+                <li><a href="{{route($routes['view'],['entityId'=>Crypt::encrypt($item->id)])}}">{{ucfirst(__('messages.view'))}}</a></li>
+                <li><a href="{{route($routes['edit'],['entityId'=>Crypt::encrypt($item->id)])}}">{{ucfirst(__('messages.edit'))}}</a></li>
                 @if(isset($routes['schedule']))
-                <li><a href="{{route($routes['schedule'])}}">{{ucfirst(__('messages.schedule'))}}</a></li>
+                <li><a href="{{route($routes['schedule'],['entityId'=>Crypt::encrypt($item->id)])}}">{{ucfirst(__('messages.schedule'))}}</a></li>
                 @endif
                 <li role="separator" class="divider"></li>
-                <li><a href="{{route($routes['delete'])}}">{{ucfirst(__('messages.delete'))}}</a></li>
+                <li><a href="{{route($routes['delete'],['entityId'=>Crypt::encrypt($item->id)])}}">{{ucfirst(__('messages.delete'))}}</a></li>
             </ul>
         </div></td>
 </tr>

@@ -40,6 +40,10 @@ class Controller extends BaseController
         $input = $this->filter($request);
         return $this->getEntity()->create($input);
     }
+    public function view($entityId)
+    {
+        return view(static::ViewFolder.'.view',['entity'=>$this->getEntity(decrypt($entityId))]);
+    }
 
     public function update($entityId, Request $request)
     {
@@ -50,7 +54,7 @@ class Controller extends BaseController
     public function edit($entityId)
     {
         $entity = $this->getEntity(decrypt($entityId));
-        return $this->view(static::ViewFolder.'.form',['entity'=>$entity]);
+        return view(static::ViewFolder.'.form',['entity'=>$entity]);
     }
 
     public function delete(Request $request)
