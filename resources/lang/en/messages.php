@@ -1,2 +1,6 @@
 <?php
-return ['course'=>'course'];
+return ['course'=>'course',
+    'view'=>'view',
+    'edit'=>'edit',
+    'schedule'=>'schedule',
+    'delete'=>'delete'];

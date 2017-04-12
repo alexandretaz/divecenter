@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public $routes = [];
 
     public function index(array $criteria = array(), array $order = array())
     {
@@ -26,7 +27,7 @@ class Controller extends BaseController
             }
         }
         $items  = $entities->paginate(20);
-        return view('default.list', ['list'=>$items, 'entity'=>$this->getEntity()]);
+        return view('default.list', ['list'=>$items, 'entity'=>$this->getEntity(), 'routes'=>$this->routes]);
     }
 
     public function add()
