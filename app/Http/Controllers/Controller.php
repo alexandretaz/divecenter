@@ -68,7 +68,7 @@ class Controller extends BaseController
         $entityKind = static::MAIN_ENTITY;
         $entity = new $entityKind();
         if($id !== null && strcasecmp($id, (int) $id) === 0) {
-            $entity::findOrFail($id);
+            $entity = $entity::findOrFail($id);
         }
         return $entity;
     }
