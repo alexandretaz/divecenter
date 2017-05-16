@@ -50,6 +50,7 @@ class Controller extends BaseController
         if(decrypt($entityId)==decrypt($request->input('id'))) {
             return $this->getEntity(decrypt($entityId))->update($request->input());
         }
+        return false;
     }
     public function edit($entityId)
     {
