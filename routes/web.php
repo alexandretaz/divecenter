@@ -27,7 +27,8 @@ Route::get('/course/schedule/{entityId}', 'CourseController@edit')->middleware('
 Route::post('/course/add', 'CourseController@create')->middleware('auth')->name('course_create');
 Route::post('/course/edit', 'CourseController@update')->middleware('auth')->name('course_update');
 Route::post('/course/delete', 'CourseController@delete')->middleware('auth')->name('course_delete');
-Route::get('/course/preq/form/{type}/{index?}', 'CourseController@getPreqForm')->middleware('auth')->name('course_get_req');
+Route::get('/course/preq/form/{type}/{index?}/{id?}', 'CourseController@getPreqForm')->middleware('auth')->name('course_get_req');
+Route::post('/course/requisites/add', 'Course\RequisitesController@create')->middleware('auth')->name('course_requisite_create');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

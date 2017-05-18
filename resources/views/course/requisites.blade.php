@@ -9,7 +9,16 @@
         </div>
         <div id="courseRequisiteTableArea" class="panel-collapse collapse" role="tabpanel" aria-labelledby="courseRequisite">
             <div class="panel-body">
-                <a href="#" class="btn btn-primary">+ {{ucfirst(__('course.requisite.add'))}}</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{__('course.preq.add')}}<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="addPreReq" id="coursePreq" data-id = "{{(int) $course->id}}">{{__('course.preq.course')}}</a></li>
+                        <li><a href="#" class="addPreReq" id="agePreq" data-id = "{{(int) $course->id}}">{{__('course.preq.age')}}</a></li>
+                        <li><a href="#" class="addPreReq" id="minDivesPreq" data-id = "{{(int) $course->id}}">{{__('course.preq.mindive')}}</a></li>
+                    </ul>
+                </div>
                 <div class="hidden-md">
                     <table class="table-responsive table-striped table-bordered table">
                         <thead>
@@ -19,6 +28,25 @@
                             <th>{{ucfirst(__('messages.action'))}}</th>
                         </tr>
                         </thead>
+                        <tbody id="bodyCourseRequisites">
+                        @forelse($course->requisites as $requisite)
+                            <tr>
+                                <td>{{ucfirst(__($requisite->requisite_type))}}</td>
+                                <td>@if(strcasecmp($requisite->requisite_type, 'age')===0)
+                                    {{ucfirst(__($requisite->requisite_value))}}
+                                    @endif
+                                    @if(strcasecmp($requisite->requisite_type, 'certification')===0)
+                                        {{\App\Course::findOrFail($requisite->requisite_value)->course}}
+                                    @endif
+                                </td>
+                                <td>&nbsp</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3">{{ucfirst((__('courese,requisite.no_requisite')))}}</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>

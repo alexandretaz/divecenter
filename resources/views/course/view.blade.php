@@ -23,3 +23,59 @@
         </div>
     </div>
 @endsection
+@section('body_scripts')
+<script>
+    indexPreq = 0;
+    $(document).ready( function(){
+            $(".addPreReq").on('click', function(){
+                id = $(this).attr('id');
+                courseId = $(this).attr('data-id');
+                type = null;
+                console.dir($(this));
+                if(id=='coursePreq'){
+                    type='course';
+                }
+                else {
+                    if(id=='agePreq') {
+                        type='age';
+                    }
+                    if(id=='minDivesPreq'){
+                        type="minDives"
+                    }
+                }
+                url ='{{route('course_get_req',['type'=>'type'])}}/'+indexPreq+'/'+courseId;
+                url =  url.replace('type', type);
+
+                $.get(url, function(data){
+                    $("#modalTitle").html('{{ucwords(__('Add Course Requisites'))}}');
+                    $("#appModalBody").html(data);
+
+                    $('#appModal').modal();
+                })
+                $("#btnModalAction").on('click', function() {
+                    valType = $("#kind0Preq").val();
+                    valValue = $("#kind0Value").val();
+                    vCourseId = $("#CourseIdPreq").val();
+                    $.ajax({
+                        method: "POST",
+                        url: "/course/requisites/add",
+                        data: { type: valType, value: valValue, course_id:vCourseId, _token:window.Laravel.csrfToken }
+                    })
+                        .done(function( response ) {
+                            $('#appModal').modal('hide');
+                            $('#bodyCourseRequisites').append('<tr><td>'+response.requisite_type+'</td><td>'+response.requisite_value+'</td><td>&nbsp</td></tr>');
+                            window.location.reload();
+                        })
+                        .fail(function(){
+                            $("#courseRequisite").prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <h4>{{ucfirst(__('course.error.creating.requisite'))}}</h4> <p>{{ucfirst(__('course.error.creating.requisite.message'))}}</p> <p> <button type="button" class="btn btn-danger">{{ucfirst(__('close this message'))}}</button></p> </div>')
+                        });
+                    return false;
+
+
+                })
+            });
+
+        }
+    );
+</script>
+@endsection

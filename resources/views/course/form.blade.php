@@ -96,7 +96,6 @@ indexPreq = 0;
     $(document).ready(function(){
         $(".addPreReq").on('click', function(){
             id = $(this).attr('id');
-            alert(id);
             type = null;
             if(id=='coursePreq'){
                 type='course';
@@ -109,7 +108,6 @@ indexPreq = 0;
                     type="minDives"
                 }
             }
-            alert(type);
             url ='{{route('course_get_req',['type'=>'type'])}}/'+indexPreq;
                  url =  url.replace('type', type);
 

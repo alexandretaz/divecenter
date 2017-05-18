@@ -15,9 +15,9 @@ class CourseController extends Controller
         'schedule'=>'course_schedule',
         'delete'=>'course_delete'];
 
-    public function getPreqForm($type, $index=0)
+    public function getPreqForm($type, $index=0, $id=null)
     {
-        return view(self::ViewFolder.'.pre_req_form',['type'=>$type, 'index'=>$index]);
+        return view(self::ViewFolder.'.pre_req_form',['type'=>$type, 'index'=>$index, 'id'=>$id]);
     }
 
     public function create(CourseRequest $request)
