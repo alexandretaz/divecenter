@@ -74,6 +74,21 @@
 
                 })
             });
+            $('.btn-delete-req').on('click', function(){
+                $.ajax({
+                    method: "POST",
+                    url: "/course/requisites/delete/",
+                    data: { type: valType, value: valValue, course_id:vCourseId, _token:window.Laravel.csrfToken }
+                })
+                    .done(function( response ) {
+                        $('#appModal').modal('hide');
+                        $('#bodyCourseRequisites').append('<tr><td>'+response.requisite_type+'</td><td>'+response.requisite_value+'</td><td>&nbsp</td></tr>');
+                        window.location.reload();
+                    })
+                    .fail(function(){
+                        $("#courseRequisite").prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <h4>{{ucfirst(__('course.error.creating.requisite'))}}</h4> <p>{{ucfirst(__('course.error.creating.requisite.message'))}}</p> <p> <button type="button" class="btn btn-danger">{{ucfirst(__('close this message'))}}</button></p> </div>')
+                    });
+            });
 
         }
     );

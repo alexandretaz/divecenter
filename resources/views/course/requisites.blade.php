@@ -29,8 +29,8 @@
                         </tr>
                         </thead>
                         <tbody id="bodyCourseRequisites">
-                        @forelse($course->requisites as $requisite)
-                            <tr>
+                        @forelse($course->requisites as $reqIndex=>$requisite)
+                            <tr id="courseReq{{$reqIndex}}">
                                 <td>{{ucfirst(__($requisite->requisite_type))}}</td>
                                 <td>@if(strcasecmp($requisite->requisite_type, 'age')===0)
                                     {{ucfirst(__($requisite->requisite_value))}}
@@ -39,7 +39,9 @@
                                         {{\App\Course::findOrFail($requisite->requisite_value)->course}}
                                     @endif
                                 </td>
-                                <td>&nbsp</td>
+                                <td>
+                                    <button type="button" id="deleteRequisite{{$reqIndex}}}" data-id="{{$reqIndex}}" class="btn btn-delete-req btn-danger">{{ucwords(__('Delete Requisite'))}}</button>
+                                </td>
                             </tr>
                             @empty
                             <tr>
