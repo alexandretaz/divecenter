@@ -97,7 +97,7 @@
                     <h4 class="modal-title" id="modalTitle"></h4>
                 </div>
                 <div class="modal-body" id="appModalBody">
-
+                @yield('modal_content')
 
 
                 </div>

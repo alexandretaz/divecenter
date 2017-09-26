@@ -17,7 +17,7 @@
                         <p><b>{{__('course.field.out_of_catalog')}}</b>: {{$entity->deleted_at}}</p>
                     </div>
                     @include ('course.requisites',['course'=>$entity])
-                    @include('course.schedule',['dates'=>$entity->events])
+                    @include('course.schedule',['dates'=>$entity->next_dates])
                 </div>
             </div>
         </div>

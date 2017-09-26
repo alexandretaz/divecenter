@@ -50,14 +50,14 @@ class Course extends Model
 
     public function getNextDateAttribute() {
         $today = new \DateTime();
-        $next = \App\Event::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->first();
-        return $next;
+        $next = \App\Event::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->first(['begins']);
+        return $next['begins'];
     }
 
     public function getNextDatesAttribute() {
         $today = new \DateTime();
-        $next = \App\Events::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->get();
-        return next;
+        $next = \App\Event::query()->where('eventable_type','=', 'course')->where('eventable_id','=',$this->id)->where('begins','>=', $today->format('Y-m-d'))->orderBy('begins','Asc')->get();
+        return $next;
     }
 
     public static function getAllLevels()
